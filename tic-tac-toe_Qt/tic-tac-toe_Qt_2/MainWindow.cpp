@@ -5,24 +5,22 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     main_layout = new QGridLayout(this);
 
-    // make game board [ROWS x COLUMNS]
+    // make game board [ROWSxCOLUMNS]
     for(int i = 0; i < ROWS; i++){
         for(int j = 0; j < COLUMNS; j++){
             Game_cells[i][j] = new GameCells();
-            //Game_cells[i][j]->setObjectName("pos_" + QString("%1").arg(i) + "_" + QString("%1").arg(j));
 
-            connect(Game_cells[i][j], SIGNAL(gameCellsClicked()), this, SLOT(getWinner()));
+            connect(Game_cells[i][j], SIGNAL(gameCellClicked()), this, SLOT(getWinner()));
             main_layout->addWidget(Game_cells[i][j], i, j);
             }
         }
 
-    Game_cells[0][0]->setMaxMoveNumber(max_moves);
+    Game_cells[0][0]->setMaxMoveNumber(max_move);
 
     this->setLayout(main_layout);
-    this->setWindowTitle("tic-tac-toe_2");
+    this->setWindowTitle("tic-tac-toe");
 }
-unsigned short MainWindow::max_moves = ROWS * COLUMNS;
-bool MainWindow::game_over = false;
+unsigned short MainWindow::max_move = ROWS * COLUMNS;
 
 MainWindow::~MainWindow(){ }
 
@@ -37,14 +35,10 @@ void MainWindow::getWinner(){
                 countO++;
             }
 
-        if(countX == ROWS){
-            QMessageBox::information(this, "Result", "Win X", QMessageBox::Ok);
-            game_over = true;
-            }
-        else if(countO == ROWS){
-            QMessageBox::information(this, "Result", "Win 0", QMessageBox::Ok);
-            game_over = true;
-            }
+        if(countX == ROWS)
+            gameResult("Win X");
+        else if(countO == ROWS)
+            gameResult("Win 0");
         }
 
     // check vertical
@@ -57,14 +51,10 @@ void MainWindow::getWinner(){
                 countO++;
             }
 
-        if(countX == ROWS){
-            QMessageBox::information(this, "Result", "Win X", QMessageBox::Ok);
-            game_over = true;
-            }
-        else if(countO == ROWS){
-            QMessageBox::information(this, "Result", "Win 0", QMessageBox::Ok);
-            game_over = true;
-            }
+        if(countX == ROWS)
+            gameResult("Win X");
+        else if(countO == ROWS)
+            gameResult("Win 0");
         }
 
     // check diagonal
@@ -75,32 +65,28 @@ void MainWindow::getWinner(){
         else if(Game_cells[j][i]->getState() == 2) // 0?
             countO++;
 
-    if(countX == ROWS){
-        QMessageBox::information(this, "Result", "Win X", QMessageBox::Ok);
-        game_over = true;
-        }
-    else if(countO == ROWS){
-        QMessageBox::information(this, "Result", "Win 0", QMessageBox::Ok);
-        game_over = true;
-        }
+        if(countX == ROWS)
+            gameResult("Win X");
+        else if(countO == ROWS)
+            gameResult("Win 0");
     }
 
     // draw?
     int cur = Game_cells[0][0]->getCurrentMoveNumber();
-    if(cur >= max_moves){
-        QMessageBox::information(this, "Result", "Draw", QMessageBox::Ok);
-        game_over = true;
-        }
-
-    // if game over, block board
-    blockBoard(game_over);
+    if(cur >= max_move)
+        gameResult("Draw");
 }
 
-void MainWindow::blockBoard(const bool block){
-    if(block){
+void MainWindow::gameResult(const QString winner){
+    int r = QMessageBox::information(this, "Result", winner + "\nDo you want play again?",
+                                     QMessageBox::Yes | QMessageBox::No);
+    if(r == QMessageBox::Yes){
         for(int i = 0; i < ROWS; i++)
-            for(int j = 0; j < COLUMNS; j++){
-                Game_cells[i][j]->blockSignals(block);
-                }
+            for(int j = 0; j < COLUMNS; j++)
+                Game_cells[i][j]->setState(0);
+
+        Game_cells[0][0]->setCurrentMoveNumber(0);
         }
+    else
+        qApp->exit(0);
 }

@@ -4,6 +4,7 @@
 #include <QtGui>
 #include "GameCells.h"
 
+// game board size
 #define ROWS 3
 #define COLUMNS 3
 
@@ -19,12 +20,11 @@ private:
     QGridLayout *main_layout;
 
     GameCells *Game_cells[ROWS][COLUMNS];
-    static unsigned short max_moves;
-    static bool game_over;
+    static unsigned short max_move;
 
 public slots:
     void getWinner();
-    void blockBoard(const bool block);
+    void gameResult(const QString winner);
 };
 
 #endif // MAINWINDOW_H

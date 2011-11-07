@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'GameCells.h'
 **
-** Created: Mon Nov 7 12:09:15 2011
+** Created: Mon Nov 7 23:43:49 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -34,14 +34,14 @@ static const uint qt_meta_data_GameCells[] = {
       11,   10,   10,   10, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-      30,   10,   10,   10, 0x0a,
+      29,   10,   10,   10, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_GameCells[] = {
-    "GameCells\0\0gameCellsClicked()\0"
-    "slotGameCellsClicked()\0"
+    "GameCells\0\0gameCellClicked()\0"
+    "slotgameCellClicked()\0"
 };
 
 const QMetaObject GameCells::staticMetaObject = {
@@ -73,8 +73,8 @@ int GameCells::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: gameCellsClicked(); break;
-        case 1: slotGameCellsClicked(); break;
+        case 0: gameCellClicked(); break;
+        case 1: slotgameCellClicked(); break;
         default: ;
         }
         _id -= 2;
@@ -83,7 +83,7 @@ int GameCells::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void GameCells::gameCellsClicked()
+void GameCells::gameCellClicked()
 {
     QMetaObject::activate(this, &staticMetaObject, 0, 0);
 }

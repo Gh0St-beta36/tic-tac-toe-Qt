@@ -1,5 +1,5 @@
-#ifndef GAMEBOARD_H
-#define GAMEBOARD_H
+#ifndef GAMECELLS_H
+#define GAMECELLS_H
 
 #include <QLabel>
 #include <QPixmap>
@@ -15,6 +15,7 @@ public:
     void setState(int st);
 
     int getCurrentMoveNumber() const;
+    void setCurrentMoveNumber(const unsigned short move_number);
     void setMaxMoveNumber(int max_num);
 
 private:
@@ -23,10 +24,10 @@ private:
     static unsigned short gc_current_move_number, gc_max_move_number;
 
 signals:
-    void gameCellsClicked();
+    void gameCellClicked();
 
 public slots:
-    void slotGameCellsClicked();
+    void slotgameCellClicked();
 
 protected:
     void mousePressEvent(QMouseEvent *event);

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'MainWindow.h'
 **
-** Created: Mon Nov 7 13:11:09 2011
+** Created: Mon Nov 7 23:43:46 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -32,14 +32,14 @@ static const uint qt_meta_data_MainWindow[] = {
 
  // slots: signature, parameters, type, tag, flags
       12,   11,   11,   11, 0x0a,
-      30,   24,   11,   11, 0x0a,
+      31,   24,   11,   11, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_MainWindow[] = {
-    "MainWindow\0\0getWinner()\0block\0"
-    "blockBoard(bool)\0"
+    "MainWindow\0\0getWinner()\0winner\0"
+    "gameResult(QString)\0"
 };
 
 const QMetaObject MainWindow::staticMetaObject = {
@@ -72,7 +72,7 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: getWinner(); break;
-        case 1: blockBoard((*reinterpret_cast< const bool(*)>(_a[1]))); break;
+        case 1: gameResult((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         default: ;
         }
         _id -= 2;

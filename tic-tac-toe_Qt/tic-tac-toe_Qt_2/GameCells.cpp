@@ -8,7 +8,7 @@ GameCells::GameCells(QLabel *parent) :
     gc_pixmap[2].load("images/0.jpg");
     this->setState(0);
 
-    connect(this, SIGNAL(gameCellsClicked()), this, SLOT(slotGameCellsClicked()));
+    connect(this, SIGNAL(gameCellClicked()), this, SLOT(slotgameCellClicked()));
 }
 unsigned short GameCells::gc_current_move_number = 0;
 unsigned short GameCells::gc_max_move_number = 0;
@@ -24,13 +24,13 @@ void GameCells::setState(int st){
 }
 
 int GameCells::getCurrentMoveNumber()const { return this->gc_current_move_number; }
+void GameCells::setCurrentMoveNumber(const unsigned short move_number){ this->gc_current_move_number = move_number; }
+
 void GameCells::setMaxMoveNumber(int max_num){ this->gc_max_move_number = max_num; }
 
-void GameCells::mousePressEvent(QMouseEvent *event){
-    emit gameCellsClicked();
-}
+void GameCells::mousePressEvent(QMouseEvent *event){ emit gameCellClicked(); }
 
-void GameCells::slotGameCellsClicked(){
+void GameCells::slotgameCellClicked(){
     if(gc_current_move_number % 2 == 0){ // if now move 'X'
         if(this->getState() == 0){ // if this cell is empty
             this->setState(1); // set 'X'
